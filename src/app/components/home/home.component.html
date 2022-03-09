@@ -1,0 +1,23 @@
+<div>
+        <div class="row mt-3" >
+            <div class="col-md-4">
+                <div class="card text-white border-primary mb-3" style="max-width: 20rem;" *ngFor="let user of users; let i = index">
+                    <a (click)="getUser(i)">
+                        <div class="card-header">{{user.userName}}'s Budget</div>
+                        <div class="card-body">
+                        <h4 class="card-title">{{user.userName}}</h4>
+                        <p class="card-text">Funds:${{user.amountStart}}</p>
+                        <button class="btn btn-secondary mt-2">
+                            Create New Transaction
+                        </button>
+                        <button class="btn btn-danger mt-2">Delete User</button>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <app-users [userTransactionDetail]="specificUser"></app-users>
+            </div>
+          </div>
+    </div>
+

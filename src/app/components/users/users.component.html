@@ -1,0 +1,21 @@
+<div class="container" *ngIf="userTransactionDetail">
+    <table class="table table-hover" *ngFor="let userTransaction of userTransactionDetail.transactionHistories;">
+        <thead>
+          <tr>
+            <th scope="col">Transaction Date</th>
+            <th scope="col">Transaction Amount</th>
+            <th scope="col">Transaction Description</th>
+            <th scope="col">Transaction Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-dark">
+            <td>{{userTransaction.createdTransaction | date: 'fullDate'}}</td>
+            <td>${{userTransaction.amountOfTransaction}}</td>
+            <td>{{userTransaction.transactionDescription}}</td>
+            <td>{{userTransaction.transactionType | uppercase}}</td>
+            <td><a routerLink="user/{{userTransactionDetail.id}}">View Details</a></td>
+          </tr>
+        </tbody>
+      </table>
+</div>

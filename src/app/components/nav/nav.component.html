@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+      <a routerLink="">
+        <h4>Budgetting App</h4>
+      </a>
+    <button type="button" class="btn btn-primary" (click)="openModal(template)">Create a user.</button>
+ 
+    <!-- Modal for adding a new user -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create User</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="userForm" (ngSubmit)="createUser(userForm)">
+        <!-- Value: {{userForm.value | json}} -->
+        <div class="form-group">
+            <label for="userName">Username:</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="userName"
+            formControlName="userName"
+            placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="amountToStart">Amount to Start:${{userForm.value.amountStart}}</label>
+            <input 
+            type="range" min="10" max="5000" value="{{userForm.value.amountStart}}" class="form-range" 
+            id="amountToStart"
+            formControlName="amountStart">
+        </div>
+        <button 
+        class="btn btn-primary"
+        [disabled]="!userForm.dirty"
+        type="submit">Submit</button>
+    </form>
+  </div>
+</ng-template>
+
+    </div>
+</nav>
