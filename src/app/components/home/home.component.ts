@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -10,9 +12,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private modalService: BsModalService, private fb: FormBuilder) { }
   users!: User[];
   specificUser!: any;
+  transactionForm!: FormGroup;
+  modalRef?: BsModalRef;
+
+  // TODO: Fill in the options for transactionDesc and transactionType
+  transactionDescriptions: string[] = []
+  transactionType: string[] = [];
+
 
   ngOnInit(): void {
     this.loadUsers();
@@ -37,8 +46,13 @@ export class HomeComponent implements OnInit {
      console.log(this.specificUser);
   }
 
-  addNewTransaction(){
-    
+  openModal(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
+  }
+
+  // TODO: update this method to call to the api to update user transactions
+  addNewTransaction(userTransactionForm: FormGroup){
+    console.log(userTransactionForm.value); 
   }
 
 }

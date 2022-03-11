@@ -38,7 +38,7 @@ export class UserService {
 
   //i dont think we need to get it by user but we could get it via routing
   getSpecificUser(username: string){
-    // Finds specific user by their id
+    // Finds specific user by their username
     const user = this.users.find(userToFind => userToFind.userName === username);
     if(user !== undefined) return of(user);
     return this.http.get<User>(`${this.baseApi}user/${username}`);

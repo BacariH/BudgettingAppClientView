@@ -7,9 +7,10 @@
                         <div class="card-body">
                         <h4 class="card-title">{{user.userName}}</h4>
                         <p class="card-text">Funds:${{user.amountStart}}</p>
-                        <button class="btn btn-secondary mt-2">
+                        <button class="btn btn-secondary mt-2" (click)="openModal(template)">
                             Create New Transaction
                         </button>
+                        <!-- TODO: create a method to delete user -->
                         <button class="btn btn-danger mt-2">Delete User</button>
                     </div>
                     </a>
@@ -18,6 +19,52 @@
             <div class="col-md-8">
                 <app-users [userTransactionDetail]="specificUser"></app-users>
             </div>
+          </div>
+          <div>
+                  <!-- Modal for adding a new transaction -->
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Add Transaction</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+  <!-- TODO: Update the values of the transactionForm to take values from amountofTransaction, transactionDescription, and transactionType -->
+      <form [formGroup]="transactionForm" (ngSubmit)="addNewTransaction(transactionForm)">
+          <!-- Value: {{userForm.value | json}} -->
+          <div class="form-group">
+              <label for="amountOfTransaction">Transaction Amount</label>
+              <input 
+              type="range" min="10" max="5000" value="" class="form-range" 
+              id="amountOfTransaction"
+              formControlName="amountOfTransaction">
+          </div>
+          <div class="form-group">
+              <label for="transactionDesc">Transaction Description:</label>
+              <select name="" id="">
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="transactionType">Transaction Type:</label>
+              <select name="" id="">
+                <option value=""></option>
+                <option value=""></option>
+            </select>
+          </div>
+          <button 
+          class="btn btn-primary"
+          [disabled]="!transactionForm.dirty"
+          type="submit">Submit</button>
+      </form>
+    </div>
+  </ng-template>
+  
           </div>
     </div>
 
