@@ -17,10 +17,12 @@ export class HomeComponent implements OnInit {
   specificUser!: any;
   transactionForm!: FormGroup;
   modalRef?: BsModalRef;
+  transForm!: HTMLFormElement;
 
   // TODO: Fill in the options for transactionDesc and transactionType
-  transactionDescriptions: string[] = []
-  transactionType: string[] = [];
+  transactionDescriptions = ['a', 'b', 'c'];
+  transactionType: string[] = ['DEBIT', 'CREDIT'];
+  updateUser!: User;
 
 
   ngOnInit(): void {
@@ -40,19 +42,42 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  getUser(userId: number){
+  getUser(username: string){
     //if we find the user with the specific id. we set that users value as specific user to be passed down to the child component
-     this.specificUser = this.users.find(user => user.id === userId + 1);
-     console.log(this.specificUser);
+     this.specificUser = this.users.find(user => user.userName === username);
+  }
+
+  deleteUserData(username: string){
+    this.userService.deleteUser(username).subscribe(
+      data => {
+        console.log(`User with the name ${username} has been deleted`);
+        // a way to reload the page after deleting a user form the server
+        window.location.reload();
+      },
+      error => {
+        console.log(error.message);
+      }
+    );
+  }
+
+  openUserEdit(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
+
+    //have to get access to the specific user and their information
+    
+
+
   }
 
   openModal(template: TemplateRef<any>){
-    this.modalRef = this.modalService.show(template);
   }
 
   // TODO: update this method to call to the api to update user transactions
   addNewTransaction(userTransactionForm: FormGroup){
-    console.log(userTransactionForm.value); 
+    //Have to get the data from the specific form user
+    console.log()
+  
   }
 
+  
 }

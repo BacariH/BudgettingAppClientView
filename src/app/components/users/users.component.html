@@ -2,10 +2,11 @@
     <table class="table table-hover" *ngFor="let userTransaction of userTransactionDetail.transactionHistories;">
         <thead>
           <tr>
-            <th scope="col">Transaction Date</th>
-            <th scope="col">Transaction Amount</th>
-            <th scope="col">Transaction Description</th>
-            <th scope="col">Transaction Type</th>
+            <th scope="col">Transaction Date |</th>
+            <th scope="col">Transaction Amount |</th>
+            <th scope="col">Transaction Description |</th>
+            <th scope="col">Transaction Type |</th>
+            <th scope="col">Details</th>
           </tr>
         </thead>
         <tbody>
@@ -14,7 +15,7 @@
             <td>${{userTransaction.amountOfTransaction}}</td>
             <td>{{userTransaction.transactionDescription}}</td>
             <td>{{userTransaction.transactionType | uppercase}}</td>
-            <td><a routerLink="user/{{userTransactionDetail.id}}">View Details</a></td>
+            <td><a routerLink="user/{{userTransactionDetail.userName}}">View Details</a></td>
           </tr>
         </tbody>
       </table>

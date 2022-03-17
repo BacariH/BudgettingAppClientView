@@ -7,7 +7,7 @@ import { UserDetailComponent } from './components/users/user-detail/user-detail.
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'user/:username',
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent
+    component: NotFoundComponent,
   }
 ];
 

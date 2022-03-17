@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
-import { TransactionHistory } from 'src/app/models/transaction-history.model';
+
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +12,7 @@ import { TransactionHistory } from 'src/app/models/transaction-history.model';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private modalService: BsModalService, private fb: FormBuilder, private userService: UserService ) {}
+  constructor(private modalService: BsModalService, private fb: FormBuilder, private userService: UserService) {}
 
   modalRef?: BsModalRef;
   userForm!: FormGroup;
@@ -47,10 +47,16 @@ export class NavComponent implements OnInit {
    this.userService.addNewUser(this.createdUser$).subscribe(
      (res)=> {
       console.log(res);
+      // TODO: See if you can use rxjs BehaviorSubject, Subject, or ReplaySubject to subscribe to the data so you dont have to use the reloadPage method
+      this.reloadPage();
      }
    );
   }
- 
+  
+  reloadPage(){
+    this.modalRef?.hide();
+    window.location.reload();
+  }
  
 
 }

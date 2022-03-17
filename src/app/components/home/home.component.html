@@ -1,17 +1,16 @@
 <div>
         <div class="row mt-3" >
             <div class="col-md-4">
-                <div class="card text-white border-primary mb-3" style="max-width: 20rem;" *ngFor="let user of users; let i = index">
-                    <a (click)="getUser(i)">
+                <div class="card text-white border-primary mb-3" style="max-width: 20rem;" *ngFor="let user of users">
+                    <a (click)="getUser(user.userName)">
                         <div class="card-header">{{user.userName}}'s Budget</div>
                         <div class="card-body">
                         <h4 class="card-title">{{user.userName}}</h4>
                         <p class="card-text">Funds:${{user.amountStart}}</p>
-                        <button class="btn btn-secondary mt-2" (click)="openModal(template)">
+                        <button class="btn btn-secondary mt-2" (click)="openUserEdit(template)">
                             Create New Transaction
                         </button>
-                        <!-- TODO: create a method to delete user -->
-                        <button class="btn btn-danger mt-2">Delete User</button>
+                        <button class="btn btn-danger mt-2" (click)="deleteUserData(user.userName)">Delete User</button>
                     </div>
                     </a>
                 </div>
@@ -31,8 +30,7 @@
     </div>
     <div class="modal-body">
   <!-- TODO: Update the values of the transactionForm to take values from amountofTransaction, transactionDescription, and transactionType -->
-      <form [formGroup]="transactionForm" (ngSubmit)="addNewTransaction(transactionForm)">
-          <!-- Value: {{userForm.value | json}} -->
+      <form [formGroup]="transactionForm" (ngSubmit)="addNewTransaction(transactionForm)" id="transForm">
           <div class="form-group">
               <label for="amountOfTransaction">Transaction Amount</label>
               <input 
@@ -42,19 +40,25 @@
           </div>
           <div class="form-group">
               <label for="transactionDesc">Transaction Description:</label>
-              <select name="" id="">
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
+              <select 
+              name="tDescription" 
+              id="transactionDesc" 
+              formControlName="transactionDesc">
+                  <option 
+                  *ngFor="let transDesc of transactionDescriptions"
+                  [ngValue]="transDesc">
+                    {{ transDesc }}
+                </option>
               </select>
           </div>
           <div class="form-group">
               <label for="transactionType">Transaction Type:</label>
-              <select name="" id="">
-                <option value=""></option>
-                <option value=""></option>
+              <select name="tType" id="transactionType" formControlName="transactionType">
+                <option 
+                  *ngFor="let transType of transactionType"
+                  [value]="transType">
+                    {{ transType }}
+                </option>
             </select>
           </div>
           <button 

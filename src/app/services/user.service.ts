@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
@@ -14,6 +14,9 @@ export class UserService {
 
   baseApi: string = environment.baseApi;
   users: User[] = [];
+
+  
+
 
   getUsers(): Observable<User[]>{
     if(this.users.length > 0)return of(this.users);
@@ -50,6 +53,13 @@ export class UserService {
         return user;
       })
     )
+  }
+
+  // delete user method
+  deleteUser(username: string){
+   
+    return this.http.delete<User>(`${this.baseApi}user/${username}`);
+
   }
 
 }
